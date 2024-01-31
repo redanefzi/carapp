@@ -1,5 +1,13 @@
 <template>
-  <div class="bg-red-800">
-    Tailwind
+  <div>
+    <NuxtLayout>
+
+    <NuxtPage />
+    </NuxtLayout>
   </div>
 </template>
+<script setup lang="ts">
+
+</script>
+<style>
+</style>
