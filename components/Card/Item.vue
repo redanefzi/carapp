@@ -3,31 +3,45 @@
         <div class="">
             <div class="">
                 <div class="flex justify-between ">
-                    <div class="text-darker font-bold mb-1">All New Rush</div>
-                    <img src="/images/icons/heart.svg" />
+                    <div class="text-darker font-bold mb-1">{{ car.title }}</div>
+                    <img :src="`/images/icons/${car.liked ? 'liked.svg' : 'heart.svg'}`" class="cursor-pointer"
+                        @click="() => { toggleLike(car.id) }" />
                 </div>
-                    <div class="text-lighter">SUV</div>
-               
+                <div class="text-lighter uppercase">{{ car.category }}</div>
             </div>
         </div>
-        <NuxtImg src="/images/cars/1.png" class="m-auto" />
+        <NuxtImg :src="`/images/cars/${+car.id % 3 + 1}.png`" class="my-auto" />
         <div class="flex justify-between mb-6 text-lighter">
             <span class="flex items-center gap-2"><img src="/images/icons/gas-station.svg" />
-                    70L</span><span class="flex items-center gap-2"><img
-                    src="/images/icons/car.svg" />Manual</span><span class="flex items-center gap-2"><img
-                    src="/images/icons/users.svg" />6 People</span>
+                70L</span><span class="flex items-center gap-2"><img src="/images/icons/car.svg" />Manual</span><span
+                class="flex items-center gap-2"><img src="/images/icons/users.svg" />6 People</span>
         </div>
         <div class="flex justify-between items-center">
             <div>
-                <span class="text-darker font-bold text-md">$99.00/</span><span class="text-lighter"> day</span>
+                <span class="text-darker font-bold text-md">${{ car.price }}/</span><span class="text-lighter"> day</span>
             </div>
             <Button>Rent Now </Button>
         </div>
     </li>
 </template>
 
-<script setup>
+<script setup lang="ts">
+import type { Car } from '~/types';
+import { useCarsStore } from "../../stores/cars";
 
+const carsStore = useCarsStore();
+
+const toggleLike = (id: string) => {
+    carsStore.toggleLike(id)
+}
+
+
+const props = defineProps({
+    car: {
+        type: Object as PropType<Car>,
+        required: true,
+    },
+});
 </script>
 
 <style lang="scss" scoped></style>
