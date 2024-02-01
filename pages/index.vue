@@ -1,5 +1,6 @@
 <template>
     <div class="flex flex-col  mx-auto">
+        <!-- {{ cc }} -->
         <article class="flex justify-between mt-8 gap-8 flex-col xl:flex-row md:flex-row">
             <Ad title="The Best Platform for Car Rental"
                 description="Ease of doing a car rental safely and reliably. Of course at a low price." image="ad1.png" />
@@ -18,8 +19,9 @@
 import { useCarsStore } from "../stores/cars";
 
 const carsStore = useCarsStore();
-const {popularCars: popular, recomendedCars: recomended} = storeToRefs(carsStore)
-
+// const {recomendedCars: recomended} = storeToRefs(carsStore)
+const popular = computed(() => carsStore.getFilteredPopularCars());
+const recomended = computed(() => carsStore.getFilteredRecomendedCars());
 </script>
 
 <style scoped></style>

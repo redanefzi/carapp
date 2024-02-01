@@ -1,10 +1,8 @@
 import { defineStore } from "pinia";
 import type { Car } from "~/types";
 
-// export const  = defineStore('cars', () => {
-
 export const useCarsStore = defineStore("cars", () => {
-  const likedCars = ref<Car[]>([]);
+  const searchText = ref("");
   const popularCars = ref<Car[]>([
     {
       id: "1",
@@ -67,9 +65,17 @@ export const useCarsStore = defineStore("cars", () => {
     },
   ]);
 
-  function toggleLike(id: string) {
-    console.log(popularCars.value.map(a => ({ id: a.id, liked: a.liked})));
+  const filteredPopularCars = ref<Car[]>([]);
+  const filteredRecomendedCars = ref<Car[]>([]);
 
+  filteredPopularCars.value = searchText.value.trim()
+    ? popularCars.value.filter((c) => c.title.includes(searchText.value))
+    : popularCars.value;
+  filteredRecomendedCars.value = searchText.value.trim()
+    ? popularCars.value.filter((c) => c.title.includes(searchText.value))
+    : popularCars.value;
+
+  function toggleLike(id: string) {
     popularCars.value = popularCars.value.map((c) =>
       c.id === id ? { ...c, liked: !c.liked } : c
     );
@@ -77,18 +83,24 @@ export const useCarsStore = defineStore("cars", () => {
     recomendedCars.value = recomendedCars.value.map((c) =>
       c.id === id ? { ...c, liked: !c.liked } : c
     );
+  }
 
-    // const liked: Car | undefined = likedCars.value.find((c) => c.id === id);
-    // if (liked === undefined) {
-    //   likedCars.value = likedCars.value.filter((c) => c.id !== id);
-    // } else {
-    //   likedCars.value.push(liked);
-    // }
+  function getFilteredPopularCars() {
+    return  searchText.value.trim()
+    ? popularCars.value.filter((c) => c.title.includes(searchText.value))
+    : popularCars.value;
+  }
+
+  function getFilteredRecomendedCars() {
+    return  searchText.value.trim()
+    ? popularCars.value.filter((c) => c.title.includes(searchText.value))
+    : popularCars.value;
   }
 
   return {
-    popularCars,
-    recomendedCars,
     toggleLike,
+    searchText,
+    getFilteredPopularCars,
+    getFilteredRecomendedCars,
   };
 });
