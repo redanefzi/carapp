@@ -20,7 +20,9 @@
             <div>
                 <span class="text-darker font-bold text-md">${{ car.price }}/</span><span class="text-lighter"> day</span>
             </div>
-            <Button>Rent Now </Button>
+            <NuxtLink :to="`/${car.id}`">
+                <Button>Rent Now </Button>
+            </NuxtLink>
         </div>
     </li>
 </template>

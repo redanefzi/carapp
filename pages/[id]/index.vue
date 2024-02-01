@@ -11,8 +11,10 @@
 </template>
 
 <script setup lang="ts">
-const popular: { id: string }[] = [{ id: "1" }, { id: "2" }, { id: "3" }, { id: "4" },]
-const recomended: { id: string }[] = [{ id: "1" }, { id: "2" }, { id: "3" }, { id: "4" }, { id: "5" }, { id: "6" }, { id: "7" }, { id: "8" },]
+import { useCarsStore } from "../../stores/cars";
+
+const carsStore = useCarsStore();
+const recomended = computed(() => carsStore.getFilteredRecomendedCars());
 </script>
 
 <style scoped></style>

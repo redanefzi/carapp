@@ -2,7 +2,7 @@
     <div class="">
         <Header />
 
-        <main class="flex border-1 border-green-600 border bg-bg">
+        <main class="flex border bg-bg">
             <slot />
         </main>
         <Footer />
