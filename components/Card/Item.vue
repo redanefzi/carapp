@@ -10,7 +10,8 @@
                 <div class="text-lighter uppercase">{{ car.category }}</div>
             </div>
         </div>
-        <NuxtImg :src="`/images/cars/${+car.id % 2 + 1}.png`" class="my-auto" />
+        <NuxtImg :src="`/images/cars/${+car.id % 2 + 1}.png`" class="my-auto"
+            :class="{ 'transform -scale-x-100': +car.id % 2 == 1 }" />
         <div class="flex justify-between mb-6 text-lighter">
             <span class="flex items-center gap-2"><img src="/images/icons/gas-station.svg" />
                 70L</span><span class="flex items-center gap-2"><img src="/images/icons/car.svg" />Manual</span><span
@@ -36,7 +37,6 @@ const carsStore = useCarsStore();
 const toggleLike = (id: string) => {
     carsStore.toggleLike(id)
 }
-
 
 const props = defineProps({
     car: {

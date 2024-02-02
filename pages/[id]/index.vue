@@ -1,6 +1,6 @@
 <template>
     <div class="flex flex-col mx-auto mt-8">
-        <div class="flex gap-8">
+        <div class="flex gap-8 max-lg:flex-col">
             <ProductCarousel title="Sports car with the best design and acceleration" description="Safety and comfort while driving a futuristic and elegant sports car" image="ad2.png" />
            <ProductDetail title="Nissan GT - R" description="" price="80.00"/>
         </div>
